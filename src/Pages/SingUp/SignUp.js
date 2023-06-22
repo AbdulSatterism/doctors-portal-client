@@ -1,15 +1,37 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthProvider';
+import toast from 'react-hot-toast';
 
 const SignUp = () => {
-
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const { createUser, updateUser } = useContext(AuthContext);
+    const [signupError, setSignupError] = useState('')
 
     const handleSignUp = data => {
-        console.log(data)
-        console.log(errors)
+        setSignupError('')
+        createUser(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                toast.success('user created successfully')
+                const userInfo = {
+                    displayName: data.name
+                }
+                updateUser(userInfo)
+                    .then(() => {
+                        // Profile updated!
+                        // ...
+                    }).catch((error) => {
+                        setSignupError(error.message)
+                    });
+            })
+            .catch(err => {
+                setSignupError(err.message)
+            })
     }
+
 
     return (
         <div className='h-[800px] flex justify-center items-center'>
@@ -39,7 +61,10 @@ const SignUp = () => {
                         })} className="w-full max-w-xs input input-bordered" />
                         {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
                     </div>
-                    <input className='w-full btn btn-accent' value="Sign Up" type="submit" />
+                    <input className='w-full mt-4 btn btn-accent' value="Sign Up" type="submit" />
+                    <div>
+                        {signupError && <p className='text-red-600'>{signupError}</p>}
+                    </div>
                 </form>
                 <p>Already have an account?<Link className='text-primary' to='/login'>Please login</Link></p>
                 <div className="divider">Or</div>
