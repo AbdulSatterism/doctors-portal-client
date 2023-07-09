@@ -1,17 +1,25 @@
 import { format } from 'date-fns';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import AppointmentOption from './AppointmentOption';
 import BookingModal from '../BookingModal/BookingModal';
+import { useQuery } from 'react-query'
+import Loading from '../../Shared/Loading/Loading';
 
 const AvailableAppointment = ({ selectedDate }) => {
-    const [appointmentOptions, setAppointmentOptions] = useState([]);
     const [treatment, setTreatment] = useState(null);
+    const date = format(selectedDate, 'PP')
 
-    useEffect(() => {
-        fetch('appointmentOption.json')
+    //use react query
+    const { data: appointmentOptions = [], refetch, isLoading } = useQuery({
+        queryKey: ['appointmentOption', date],
+        // queryFn: () => fetch(`http://localhost:5000/v2/appointmentOption?date=${date}`)
+        queryFn: () => fetch(`http://localhost:5000/appointmentOption?date=${date}`)
             .then(res => res.json())
-            .then(data => setAppointmentOptions(data))
-    }, [])
+    });
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
 
     return (
         <section className='my-16'>
@@ -33,6 +41,7 @@ const AvailableAppointment = ({ selectedDate }) => {
                     treatment={treatment}
                     setTreatment={setTreatment}
                     selectedDate={selectedDate}
+                    refetch={refetch}
                 ></BookingModal>
             }
 
