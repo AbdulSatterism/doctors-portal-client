@@ -19,6 +19,7 @@ const Navbar = () => {
     useEffect(() => {
         document.body.style.backgroundColor = color;
     }, [color])
+
     const navItems = <>
         <li><Link onClick={() => handleBackground('black')}>Mode</Link></li>
         <li><Link to="/">Home</Link></li>
