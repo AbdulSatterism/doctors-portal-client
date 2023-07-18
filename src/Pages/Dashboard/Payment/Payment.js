@@ -3,7 +3,7 @@ import { useLoaderData, useNavigation } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import CheckoutForm from './CheckoutForm';
-import Loading from '../../Shared/Loading/Loading';
+// import Loading from '../../Shared/Loading/Loading';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
 console.log(stripePromise)

@@ -26,7 +26,7 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
         }
         //sent data to the server
         // once data is saved then close the modal
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://doctors-portal-server-51g6.onrender.com/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

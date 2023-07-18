@@ -12,8 +12,8 @@ const AvailableAppointment = ({ selectedDate }) => {
     //use react query
     const { data: appointmentOptions = [], refetch, isLoading } = useQuery({
         queryKey: ['appointmentOption', date],
-        // queryFn: () => fetch(`http://localhost:5000/v2/appointmentOption?date=${date}`)
-        queryFn: () => fetch(`http://localhost:5000/appointmentOption?date=${date}`)
+        // queryFn: () => fetch(`https://doctors-portal-server-51g6.onrender.com/v2/appointmentOption?date=${date}`)
+        queryFn: () => fetch(`https://doctors-portal-server-51g6.onrender.com/appointmentOption?date=${date}`)
             .then(res => res.json())
     });
 
