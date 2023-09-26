@@ -1,3 +1,10 @@
+Doctors Portal:
+•	There is some functionality, a patient or user can sign in with email and password, sign in with google and get appointment in different time and patient can pay with stripe.
+•	There is a admin role sheja@gmail.com pass:123456 this is admin. Admin can see all patient and admin can delete patient, Add doctor, manage doctor and also can do make admin someone.
+•	Technologies: React js, javascript, node js, mongodb, jwt, firebase, react-hook-form,  react-hot-toast, react-query, react router dom
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
